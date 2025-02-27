@@ -1,0 +1,220 @@
+import java.io.*;
+import java.util.*;
+
+
+import java.util.StringJoiner;
+
+class SinglyLinkedList 
+{
+    private Node first;
+    private Node last;
+    private int count;
+    
+    private static class Node
+    {
+        int data;
+        Node next;
+        
+        public Node(int data)
+        {
+            this.data=data;
+            next=null;
+        }
+    }
+    
+    public SinglyLinkedList()
+    {
+        first=null;
+        last=null;
+        count=0;
+    }
+    
+    
+    public void add(int data)
+    {
+        if(first==null)
+        {
+            Node t = new Node(data);
+            first = t;
+            last = t;
+            count++;
+        }
+        else
+        {
+            Node t = new Node(data);
+            last.next = t;
+            last = last.next;
+            count++;
+        }
+    }
+    
+    public int size()
+    {
+        return count;
+    }
+    
+    public void display()
+    {
+        for(Node T = first; T!=null; T=T.next)
+        {
+            System.out.print(T.data+"->");
+        }
+        System.out.println("null");
+    }
+    
+    public String toString()
+    {
+        /*
+        //Attempt 1 : Worst Approach as you are creating new object of String(which is immutable) every time when you find data in LinkedList.
+        // As String is immutable objects s points to every new String which is being created on Heap.
+        String s = "[";
+        for(Node T = first; T!=null; T=T.next)
+        {
+            s = s + T.data+",";
+        }
+        s = s.substring(0,s.length()-1);
+        s = s + "]";
+        return s;
+        
+        */
+                                       //separator,start,end
+        StringJoiner sj = new StringJoiner(",","[","]");
+        
+        for(Node T = first; T!=null; T=T.next)
+        {
+            sj.add(String.valueOf(T.data));
+        }
+        
+        return sj.toString();
+    }
+
+    public int sum()
+    {
+        int sum=0;
+
+        for(Node T = first; T!=null; T=T.next)
+        {
+            sum += T.data;
+        }
+
+        return sum;
+    }
+
+    public void dispOddEven()
+    {
+        List<Integer> listOdd = new LinkedList<>();
+        List<Integer> listEven = new LinkedList<>();
+        for(Node T = first; T!=null; T=T.next)
+        {
+            if(T.data % 2 == 0)
+            {
+                listEven.add(T.data);
+            }
+            else
+            {
+                listOdd.add(T.data);
+            }
+        }
+
+        System.out.println("Odd Elements : "+listOdd);
+        System.out.println("Even Elements : "+listEven);
+    }
+
+    public void dispAlternate()
+    {
+        int cnt=0;
+        for(Node T = first; T!=null; T=T.next)
+        {
+            cnt++;
+            if(cnt%2 == 0)
+            {
+                continue;
+            }
+            
+            System.out.print(T.data+"->");
+        }
+        System.out.println("null");
+    }
+
+    public int max()
+    {
+        int max=first.data;
+        for(Node T = first.next; T!=null; T=T.next)
+        {
+            if(T.data > max)
+            {
+                max=T.data;
+            }
+        }
+
+        return max;
+    }
+
+    public int min()
+    {
+        int min=first.data;
+        for(Node T = first.next; T!=null; T=T.next)
+        {
+            if(T.data < min)
+            {
+                min=T.data;
+            }
+        }
+
+        return min;
+    }
+
+    public int countPositiveNumbers()
+    {
+        int cnt=0;
+        for(Node T = first; T!=null; T=T.next)
+        {
+           if(T.data > 0)
+                cnt++;
+        }
+
+        return cnt;
+    }
+
+    public int countNegativeNumbers()
+    {
+        int cnt=0;
+        for(Node T = first; T!=null; T=T.next)
+        {
+           if(T.data < 0)
+                cnt++;
+        }
+
+        return cnt;
+    }
+}
+
+
+public class Demo
+{
+
+    public static void main(String[] args) 
+    {
+        SinglyLinkedList L = new SinglyLinkedList();
+        L.add(11);
+        L.add(22);
+        L.add(33);
+        L.add(-10);
+        L.add(-5);
+        
+        System.out.println(L);
+        L.display();
+        System.out.println(L.size());
+
+        System.out.println("Sum  : "+L.sum());
+        L.dispOddEven();
+        System.out.print("Alternate Elements : ");
+        L.dispAlternate();
+
+        System.out.println("Maximum : "+L.max());
+        System.out.println("Minimun : "+L.min());
+
+        System.out.println("Positive : "+L.countPositiveNumbers());
+        System.out.println("Negative : "+L.countNegativeNumbers());
+    }
+}
