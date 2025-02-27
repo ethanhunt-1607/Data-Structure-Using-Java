@@ -216,5 +216,21 @@ public class Demo
 
         System.out.println("Positive : "+L.countPositiveNumbers());
         System.out.println("Negative : "+L.countNegativeNumbers());
+/*
+    OUTPUT : 
+            [11,22,33,-10,-5]
+            11->22->33->-10->-5->null
+            5
+            Sum  : 51
+            Odd Elements : [11, 33, -5]
+            Even Elements : [22, -10]
+            Alternate Elements : 11->33->-5->null
+            Maximum : 33
+            Minimun : -10
+            Positive : 3
+            Negative : 2
+*/
+
+
     }
 }
